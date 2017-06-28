@@ -26,6 +26,7 @@ object TwitterIngestTutorial extends LazyLogging {
   }
 
   def publishTweets(tweets: RDD[(Long, String)]): Unit = {
+    logger.info(s"WILL PUBLISH ${tweets.count}")
   }
 
   case class KafkaWriter(brokers: String, topic: String) extends LazyLogging {

@@ -3,9 +3,11 @@ package com.svds.blogs.ingest_spark_kafka
 import java.io._
 import java.util.Properties
 
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.spark.rdd.RDD
 
-object Helpers {
+object Helpers extends LazyLogging {
+  
   def loadTwitterAuthFromFile(path: String): Unit = {
     val props = new Properties()
     props.load(new FileInputStream(path))
@@ -23,6 +25,7 @@ object Helpers {
             throw new RuntimeException(s"Cannot find $key in the environment")
           }
         })
+    logger.info("All twitter variables are present")
   }
 
   def termSearchRDD(searchTerms: List[String])(tweets: RDD[String]): RDD[String] = {
